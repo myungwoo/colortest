@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>색 검사 테스트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+    <div id="loading"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2" id="introduction-stage">
+                <h1 class="title">색 검사 테스트</h1>
+                <p>질문에 제일 알맞은 항을 먼저 선택해주세요. 각 항 별로 4점(우선순위 최상), 3점, 2점, 1점(우선순위 최하) 순서로 점수를 매기게 됩니다. 총 17개의 질문이 있으며, 모든 질문에 답하면 테스트는 종료됩니다.</p>
+                <br/>
+                <div class="text-center">
+                    <button id="question-start" type="button" class="btn btn-dark">테스트 시작</button>
+                </div>
+            </div>
+            <div class="col-md-8 offset-md-2" id="question-stage">
+                <h1 class="title">색 검사 테스트</h1>
+                <h4 class="question">질문 <span id="question-id">1</span>. <span id="question-content">문장</span></h4>
+                <div class="choices">
+                    <div class="choice">(<span class="order"></span>) <span class="content"></span></div>
+                    <div class="choice">(<span class="order"></span>) <span class="content"></span></div>
+                    <div class="choice">(<span class="order"></span>) <span class="content"></span></div>
+                    <div class="choice">(<span class="order"></span>) <span class="content"></span></div>
+                </div>
+                <div class="buttons">
+                    <button id="clear" type="button" class="btn btn-secondary">초기화</button>
+                    <button id="next" type="button" class="btn btn-primary" disabled>다음 문제</button>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                </div>
+            </div>
+            <div class="col-md-8 offset-md-2" id="result-stage">
+                <h1 class="title">색 검사 테스트 결과</h1>
+                <ul>
+                    <li><strong>빨강:</strong> <span id="red-score"></span></li>
+                    <li><strong>파랑:</strong> <span id="blue-score"></span></li>
+                    <li><strong>초록:</strong> <span id="green-score"></span></li>
+                    <li><strong>노랑:</strong> <span id="yellow-score"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bundle.js" type="text/javascript"></script>
+</body>
+</html>
