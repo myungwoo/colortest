@@ -4,14 +4,14 @@ import 'bootstrap';
 
 $(function(){
   let questions, current_question_id = 0;
-  $.getJSON('questions.json', function(data){
+  $.getJSON('questions.json', data => {
     if (!data) return;
     questions = data;
     $('#loading').css('display', 'none');
     $('#introduction-stage').css('display', 'block');
   });
 
-  $('#question-start').click(function(){
+  $('#question-start').click(() => {
     loadQuestion(0);
     $('#introduction-stage').css('display', 'none');
     $('#question-stage').css('display', 'block');
@@ -25,7 +25,7 @@ $(function(){
     yellow: 0,
   };
 
-  function loadQuestion(id){
+  const loadQuestion = id => {
     if (id < 0 || id >= questions.length)
       return false;
     current_question_id = id;
@@ -45,19 +45,20 @@ $(function(){
     return true;
   }
 
-  function reset(){
+  const reset = () => {
     used.clear();
     $('.choice').removeAttr('score');
     $('.choice .order').html('&nbsp;&nbsp;');
     $('#next').attr('disabled', true);
   }
 
-  $('.choice').click(function(evt){
-    if ($(this).attr('score')) return false;
+  $('.choice').click(evt => {
+    const $this = $(evt.currentTarget);
+    if ($this.attr('score')) return false;
     for (let i=4;i>0;i--) if (!used.has(i)){
       used.add(i);
-      $(this).attr('score', i);
-      $(this).find('.order').html(i);
+      $this.attr('score', i);
+      $this.find('.order').html(i);
       break;
     }
     if (used.size === 4) $('#next').removeAttr('disabled');
@@ -65,7 +66,7 @@ $(function(){
 
   $('#clear').click(reset);
 
-  $('#next').click(function(){
+  $('#next').click(() => {
     let invalid = false;
     for (let i=0;i<4;i++){
       const obj = $(`.choice:nth-child(${i+1})`);
