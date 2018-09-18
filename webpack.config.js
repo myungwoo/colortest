@@ -37,7 +37,9 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: dir_html },
     ]),
-    new MinifyPlugin(),
+    new MinifyPlugin({
+      extractComments: true
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
   ],
   stats: {
