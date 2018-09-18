@@ -1,6 +1,4 @@
-import '@babel/polyfill';
 import $ from 'jquery';
-import 'bootstrap';
 
 $(function(){
   let questions, current_question_id = 0;

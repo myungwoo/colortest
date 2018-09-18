@@ -9,7 +9,7 @@ const dir_html = path.resolve(__dirname, 'html');
 const dir_build = path.resolve(__dirname, 'build');
 
 module.exports = {
-  entry: ['@babel/polyfill', path.resolve(dir_js, 'index.js')],
+  entry: ['@babel/polyfill', 'bootstrap', path.resolve(dir_js, 'index.js')],
   output: {
     path: dir_build,
     filename: 'js/bundle.js',
