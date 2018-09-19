@@ -62,13 +62,19 @@
                 <table class="table table-bordered text-center">
                     <thead>
                         <tr>
-                            <th scope="col"><span class="badge badge-danger color-name">빨강</span></th>
-                            <th scope="col"><span class="badge badge-primary color-name">파랑</span></th>
-                            <th scope="col"><span class="badge badge-success color-name">초록</span></th>
-                            <th scope="col"><span class="badge badge-warning color-name">노랑</span></th>
+                            <th scope="col">제작자</th>
+                            <th scope="col">계획자</th>
+                            <th scope="col">중재자</th>
+                            <th scope="col">홍보자</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td><span class="badge badge-danger color-name">빨강</span></td>
+                            <td><span class="badge badge-primary color-name">파랑</span></td>
+                            <td><span class="badge badge-success color-name">초록</span></td>
+                            <td><span class="badge badge-warning color-name">노랑</span></td>
+                        </tr>
                         <tr>
                             <td id="red-score"></td>
                             <td id="blue-score"></td>
@@ -78,6 +84,7 @@
                     </tbody>
                 </table>
                 <div class="text-center">
+                    <a href="result.pdf" target="_blank" class="btn btn-secondary btn-sm">결과지 보기</a>
                     <button type="button" class="btn btn-primary btn-sm" id="copy-url" data-toggle="tooltip" data-placement="bottom" data-title="복사되었습니다!" data-trigger="click">결과 URL 복사</button>
                 </div>
             </div>
