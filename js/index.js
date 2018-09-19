@@ -92,19 +92,17 @@ $(function(){
       const score = parseInt(obj.attr('score'));
       scores[type] += score;
     }
-    if (!loadQuestion(current_question_id+1)) showResult();
+    if (!loadQuestion(current_question_id+1)) window.location.href = `?r=${scores['red']},${scores['blue']},${scores['green']},${scores['yellow']}`;
   });
 
-  const showResult = myScores => {
-    let _scores = scores;
-    if (myScores !== undefined){
-      _scores['red'] = myScores[0];
-      _scores['blue'] = myScores[1];
-      _scores['green'] = myScores[2];
-      _scores['yellow'] = myScores[3];
-    }
+  const showResult = score => {
+    const scores = {};
+    scores['red'] = score[0];
+    scores['blue'] = score[1];
+    scores['green'] = score[2];
+    scores['yellow'] = score[3];
     // 테스트 완료
-    for (const [c, s] of Object.entries(_scores)){
+    for (const [c, s] of Object.entries(scores)){
       const mn = questions.length, mx = 4*questions.length;
       $(`#${c}-score`).html(s);
       $(`#${c}-score`).css('background-color', getHeatmapColorHex(mn, mx, s));
@@ -113,7 +111,7 @@ $(function(){
       .click(() => {
         const $temp = $("<input>");
         $("body").append($temp);
-        $temp.val(window.location.href.split('?')[0] + `?r=${_scores['red']},${_scores['blue']},${_scores['green']},${_scores['yellow']}`).select();
+        $temp.val(window.location.href).select();
         document.execCommand("copy");
         $temp.remove();
       })
