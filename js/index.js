@@ -1,20 +1,13 @@
 import $ from 'jquery';
 
+import { getHeatmapColorHex, urlParam } from './lib';
+
 $(function(){
   let questions, current_question_id = 0;
   $.getJSON('questions.json', data => {
     if (!data) return;
     questions = data;
     $('#loading').css('display', 'none');
-    const urlParam = name => {
-      const url = window.location.href;
-      name = name.replace(/[\[\]]/g, "\\$&");
-      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-          results = regex.exec(url);
-      if (!results) return null;
-      if (!results[2]) return '';
-      return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
     if (urlParam('r')){
       showResult(urlParam('r').split(',').map(e => Number(e)));
       return;
@@ -111,13 +104,10 @@ $(function(){
       _scores['yellow'] = myScores[3];
     }
     // 테스트 완료
-    const getColor = value => {
-      const mn = questions.length, mx = 4*questions.length;
-      return `hsl(${(value-mn)/(mx-mn)*120}, 90%, 60%)`;
-    };
     for (const [c, s] of Object.entries(_scores)){
+      const mn = questions.length, mx = 4*questions.length;
       $(`#${c}-score`).html(s);
-      $(`#${c}-score`).css('background-color', getColor(s));
+      $(`#${c}-score`).css('background-color', getHeatmapColorHex(mn, mx, s));
     }
     $('#copy-url')
       .click(() => {
