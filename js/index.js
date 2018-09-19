@@ -32,9 +32,15 @@ $(function(){
     $('#question-content').html(q.question);
     const order = ['red', 'blue', 'green', 'yellow'];
     order.sort(() => 0.5-Math.random()); // Shuffle order
+
+    const template = $('.choice:first-child').clone();
+    $('.choices').empty();
     for (let i=0;i<4;i++){
-      $(`.choice:nth-child(${i+1}) .content`).html(q[order[i]]);
-      $(`.choice:nth-child(${i+1})`).attr('answer-type', order[i]);
+      const node = template.clone();
+      node.find('.content').html(q[order[i]]);
+      node.attr('answer-type', order[i]);
+      node.click(onChoiceClick);
+      $('.choices').append(node);
     }
     reset();
 
@@ -43,14 +49,7 @@ $(function(){
     return true;
   }
 
-  const reset = () => {
-    used.clear();
-    $('.choice').removeAttr('score');
-    $('.choice .order').html('&nbsp;&nbsp;');
-    $('#next').attr('disabled', true);
-  }
-
-  $('.choice').click(evt => {
+  const onChoiceClick = evt => {
     const $this = $(evt.currentTarget);
     if ($this.attr('score')) return false;
     for (let i=4;i>0;i--) if (!used.has(i)){
@@ -60,7 +59,14 @@ $(function(){
       break;
     }
     if (used.size === 4) $('#next').removeAttr('disabled');
-  });
+  };
+
+  const reset = () => {
+    used.clear();
+    $('.choice').removeAttr('score');
+    $('.choice .order').html('&nbsp;&nbsp;');
+    $('#next').attr('disabled', true);
+  }
 
   $('#clear').click(reset);
 
