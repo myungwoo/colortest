@@ -56,3 +56,11 @@
 #introduction-stage, #question-stage, #result-stage {
     display: none;
 }
+
+/* 결과 테이블 테두리 */
+table.table-bordered th, table.table-bordered td {
+    border: solid #aaa 1px;
+}
+table.table-bordered {
+    border: solid #333 1px;
+}
