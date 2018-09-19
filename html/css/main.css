@@ -26,6 +26,14 @@
     cursor: pointer;
 }
 
+.order {
+    font-size: 100%;
+    font-weight: 500;
+    margin-right: 5px;
+    min-width: 23px;
+    text-align: center;
+}
+
 .content {
     display: inline-block;
 }
@@ -39,6 +47,10 @@
     height: 100%;
     background: url('../loading.svg') 50% 50% no-repeat rgb(249,249,249);
     z-index: 1000;
+}
+
+.color-name {
+    font-size: 100%;
 }
 
 #introduction-stage, #question-stage, #result-stage {

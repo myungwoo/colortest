@@ -44,7 +44,10 @@
                 <h1 class="title">색 검사 테스트</h1>
                 <h3 class="question">질문 <span id="question-id">1</span>. <span id="question-content">문장</span></h3>
                 <ul class="list-group choices">
-                    <li class="list-group-item choice">(<span class="order"></span>) <span class="content"></span></li>
+                    <li class="list-group-item align-items-center choice">
+                        <span class="badge badge-dark order"></span>
+                        <span class="content"></span>
+                    </li>
                 </ul>
                 <div class="buttons">
                     <button id="clear" type="button" class="btn btn-secondary">초기화</button>
@@ -56,12 +59,27 @@
             </div>
             <div class="col-md-8 offset-md-2" id="result-stage">
                 <h1 class="title">색 검사 테스트 결과</h1>
-                <ul>
-                    <li><strong>빨강:</strong> <span id="red-score"></span></li>
-                    <li><strong>파랑:</strong> <span id="blue-score"></span></li>
-                    <li><strong>초록:</strong> <span id="green-score"></span></li>
-                    <li><strong>노랑:</strong> <span id="yellow-score"></span></li>
-                </ul>
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col"><span class="badge badge-danger color-name">빨강</span></th>
+                            <th scope="col"><span class="badge badge-primary color-name">파랑</span></th>
+                            <th scope="col"><span class="badge badge-success color-name">초록</span></th>
+                            <th scope="col"><span class="badge badge-warning color-name">노랑</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="red-score"></td>
+                            <td id="blue-score"></td>
+                            <td id="green-score"></td>
+                            <td id="yellow-score"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary btn-sm" id="copy-url" data-toggle="tooltip" data-placement="bottom" data-title="복사되었습니다!" data-trigger="click">결과 URL 복사</button>
+                </div>
             </div>
         </div>
     </div>

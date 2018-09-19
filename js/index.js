@@ -6,6 +6,19 @@ $(function(){
     if (!data) return;
     questions = data;
     $('#loading').css('display', 'none');
+    const urlParam = name => {
+      const url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    if (urlParam('r')){
+      showResult(urlParam('r').split(',').map(e => Number(e)));
+      return;
+    }
     $('#introduction-stage').css('display', 'block');
   });
 
@@ -86,14 +99,41 @@ $(function(){
       const score = parseInt(obj.attr('score'));
       scores[type] += score;
     }
-    if (loadQuestion(current_question_id+1)){
-    }else{
-      // 테스트 완료
-      for (const [c, s] of Object.entries(scores)){
-        $(`#${c}-score`).html(s);
-      }
-      $('#question-stage').css('display', 'none');
-      $('#result-stage').css('display', 'block');
-    }
+    if (!loadQuestion(current_question_id+1)) showResult();
   });
+
+  const showResult = myScores => {
+    let _scores = scores;
+    if (myScores !== undefined){
+      _scores['red'] = myScores[0];
+      _scores['blue'] = myScores[1];
+      _scores['green'] = myScores[2];
+      _scores['yellow'] = myScores[3];
+    }
+    // 테스트 완료
+    const getColor = value => {
+      const mn = questions.length, mx = 4*questions.length;
+      return `hsl(${(value-mn)/(mx-mn)*120}, 90%, 60%)`;
+    };
+    for (const [c, s] of Object.entries(_scores)){
+      $(`#${c}-score`).html(s);
+      $(`#${c}-score`).css('background-color', getColor(s));
+    }
+    $('#copy-url')
+      .click(() => {
+        const $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val(window.location.href.split('?')[0] + `?r=${_scores['red']},${_scores['blue']},${_scores['green']},${_scores['yellow']}`).select();
+        document.execCommand("copy");
+        $temp.remove();
+      })
+      .tooltip()
+      .on('shown.bs.tooltip', evt => {
+        const $this = $(evt.currentTarget);
+        setTimeout(() => $this.tooltip('hide'), 800);
+      });
+
+    $('#question-stage').css('display', 'none');
+    $('#result-stage').css('display', 'block');
+  };
 });
