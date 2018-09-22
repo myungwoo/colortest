@@ -125,6 +125,21 @@ class WebController {
         setTimeout(() => $this.tooltip('hide'), 800);
       });
 
+    $('#kakao-share').click(() => {
+      window.Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: '나의 색 검사 테스트 결과 공유',
+          description: `빨강: ${scores['red']}, 파랑: ${scores['blue']}, 초록: ${scores['green']}, 노랑: ${scores['yellow']}`,
+          imageUrl: '',
+          link: {
+            webUrl: window.location.href,
+          },
+        },
+        buttonTitle: '결과보기',
+      });
+    });
+
     $('#loading').css('display', 'none');
     $('#result-stage').css('display', 'block');
   };
