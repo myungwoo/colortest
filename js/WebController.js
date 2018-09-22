@@ -134,9 +134,13 @@ class WebController {
           imageUrl: '',
           link: {
             webUrl: window.location.href,
+            mobileWebUrl: window.location.href,
           },
         },
-        buttonTitle: '결과보기',
+        buttons: [
+          { title: '결과보기', link: { webUrl: window.location.href, mobileWebUrl: window.location.href } },
+          { title: '검사하기', link: { webUrl: window.location.href.split('?')[0], mobileWebUrl: window.location.href.split('?')[0] } },
+        ],
       });
     });
 
